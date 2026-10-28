@@ -1,3 +1,3 @@
 import { NextFunction, Request, Response } from 'express';
-export declare const metricMiddleware: (next: NextFunction, req: Request, res: Response) => void;
+export declare const metricMiddleware: (req: Request, res: Response, next: NextFunction) => void;
 //# sourceMappingURL=index.d.ts.map

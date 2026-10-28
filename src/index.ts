@@ -24,7 +24,7 @@ app.post('/updateName', (req, res) => {
 app.use(metricMiddleware);
 
 app.get('/name', async (req, res) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 10000));
     res.json({
         msg: "hi there from the backend ",
         name:user.name

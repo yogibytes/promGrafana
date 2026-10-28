@@ -1,8 +1,10 @@
 import { requestCounter } from './requestCount.js';
 import { activeRequestsGauge } from './activeRequests.js';
-export const metricMiddleware = (next, req, res) => {
+export const metricMiddleware = (req, res, next) => {
     const startTime = Date.now();
     res.on('finish', () => {
+        activeRequestsGauge.inc();
+        console.log(`activeUsers are ${activeRequestsGauge.inc()}`);
         const endTime = Date.now();
         console.log(`Request took ${startTime - endTime} ms`);
         requestCounter.inc({
