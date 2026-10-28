@@ -10,6 +10,14 @@ how we could built system that help prevent this
     for example - let you have todo server and you write syntactic sugar code which got crashed due to high traffic then what will happen that a log file of these errors get created you extracted and save in realDB and host it fetching continuosly and showing the user for it . and write some code to send message if some condition meet for worst things and similar for the graphs and all  
 
 
-1) lets try to logs the output of the request in the terminal 
-2) then expose an endpoints where the prometheus could listen 
-3) 
+   # what we want to achieve
+   a) the number of request hitting to the endpoint get logs 
+   b) the total number of the live user could be reflected 
+   c) the latency / time to access the website by the different user 
+
+   solution of a is - simply drag the prom-client library which help to increment the nuber of req each time 
+                use the client.counter(method ) //define some params and you are good to go 
+
+   solution of b is - similar to a add the gauge method and increment once new user connected and decrement once status code return back 
+
+   c is slighlty tricky -- we'll see tomorrow
