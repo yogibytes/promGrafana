@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express"
+import express from "express"
 import client from 'prom-client'
 import {metricMiddleware} from './metric/index.js'
 
@@ -7,16 +7,15 @@ app.use(express.json());
 
 const PORT = 3000;
 let user = {
-
-    name: "aman",
-    age : 20
+    name: "aman"
 }
+
 
 app.post('/updateName', (req, res) => {
     const { name } = req.body;
     user.name = name;
     res.json({
-        msg: "updated the name now send the /name",
+        msg: `updated the name now send the ${name}`,
     })
 })
 
@@ -24,11 +23,13 @@ app.post('/updateName', (req, res) => {
 app.use(metricMiddleware);
 
 app.get('/name', async (req, res) => {
-    await new Promise((resolve) => setTimeout(resolve, 10000));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+    
     res.json({
         msg: "hi there from the backend ",
         name:user.name
     })
+
 })
 app.get("/metrics", async (req, res) => {
     const metrics = await client.register.metrics();
@@ -40,5 +41,4 @@ app.listen(PORT,()=> console.log(
     `server is listening at port ${PORT}`)
 );
 
-console.log("server abruppted suddenly")
     
